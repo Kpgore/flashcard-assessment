@@ -29,13 +29,6 @@ function AddCard() {
 
     const handleCardSubmit = async (event) => {
         event.preventDefault();
-
-        // You can implement your card submission logic here
-        // For example, you can call an API to add the card to the deck
-        console.log("Card Front:", cardFront);
-        console.log("Card Back:", cardBack);
-
-        // Clear the form after submission
         setCardFront("");
         setCardBack("");
     };
