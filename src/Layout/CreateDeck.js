@@ -18,12 +18,15 @@ function CreateDeck() {
         });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        createDeck(deckData);
-
-        setDeckData({...initialDeckData});
-        history.push(`/`);
+        try {
+            await createDeck(deckData);
+            setDeckData({...initialDeckData});
+            history.push(`/`);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

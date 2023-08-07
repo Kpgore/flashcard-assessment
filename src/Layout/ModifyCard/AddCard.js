@@ -8,6 +8,8 @@ function AddCard() {
     const deckId = params.deckId;
 
     const [deck, setDeck] = useState({});
+    const [cardFront, setCardFront] = useState("");
+    const [cardBack, setCardBack] = useState("");
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -23,7 +25,20 @@ function AddCard() {
 
         loadDeck();
         return () => abortController.abort();
-    }, [deckId])
+    }, [deckId]);
+
+    const handleCardSubmit = async (event) => {
+        event.preventDefault();
+
+        // You can implement your card submission logic here
+        // For example, you can call an API to add the card to the deck
+        console.log("Card Front:", cardFront);
+        console.log("Card Back:", cardBack);
+
+        // Clear the form after submission
+        setCardFront("");
+        setCardBack("");
+    };
 
     if (!deck.name) return null;
 
@@ -37,7 +52,15 @@ function AddCard() {
                 </ol>
             </nav>
             <h3>{deck.name}: Add Card</h3>
-            <Form deck={deck} cardFront="" cardBack="" formType="add"/>
+            <Form
+                deck={deck}
+                cardFront={cardFront}
+                cardBack={cardBack}
+                formType="add"
+                onSubmit={handleCardSubmit}
+                onCardFrontChange={setCardFront}
+                onCardBackChange={setCardBack}
+            />
         </div>
     )
 }
